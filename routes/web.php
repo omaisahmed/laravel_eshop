@@ -1,0 +1,55 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductsController;
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/',[SiteController::class, 'index'])->name('site.index');
+Route::get('/products',[SiteController::class, 'products'])->name('site.products');
+Route::get('/products/{slug}',[SiteController::class, 'show'])->name('site.show');
+Route::get('/product/{productdetail}',[SiteController::class, 'product_detail'])->name('site.productdetail');
+Route::get('/categories',[SiteController::class, 'categories'])->name('site.categories');
+Route::get('/about',[SiteController::class, 'about'])->name('site.about');
+Route::get('/contact',[SiteController::class, 'contact'])->name('site.contact');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard.pages.index');
+// });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function(){
+    Route::get('/dashboard',[AdminController::class, 'index'])->name('dashboard.index');
+    Route::get('/category',[CategoryController::class, 'index'])->name('category.index');
+    Route::get('/create-category',[CategoryController::class, 'create_category'])->name('category.create');
+    Route::post('/create-category-submit',[CategoryController::class, 'create_category_submit'])->name('category.create.submit');
+    Route::get('/edit-category/{id}',[CategoryController::class, 'edit_category'])->name('category.edit');
+    Route::post('/edit-category-submit/{id}',[CategoryController::class, 'edit_category_submit'])->name('category.edit.submit');
+    Route::get('/delete-category/{id}',[CategoryController::class, 'delete_category'])->name('category.delete');
+    Route::get('/products',[ProductsController::class, 'index'])->name('products.index');
+    Route::get('/create-product',[ProductsController::class, 'create_product'])->name('products.create');
+    Route::post('/create-product-submit',[ProductsController::class, 'create_product_submit'])->name('products.create.submit');
+    Route::get('/edit-product/{id}',[ProductsController::class, 'edit_product'])->name('products.edit');
+    Route::post('/edit-product-submit/{id}',[ProductsController::class, 'edit_product_submit'])->name('products.edit.submit');
+    Route::get('/delete-product/{id}',[ProductsController::class, 'delete_product'])->name('products.delete');
+  });
+
+
+
