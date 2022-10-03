@@ -2204,3 +2204,17 @@ textarea.input {
 .header-search form .input {
   border-radius: 25px 0px 0px 25px;
 }
+
+.bg-black {
+  background-color: black;
+}
+.text-white{
+  color: white;
+}
+.dropdown-toggle{
+  cursor: pointer;
+}
+.cart-product-txt {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}

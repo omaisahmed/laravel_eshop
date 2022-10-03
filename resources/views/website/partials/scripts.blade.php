@@ -5,3 +5,5 @@
 		<script src="{{asset('frontend/js/nouislider.min.js')}}"></script>
 		<script src="{{asset('frontend/js/jquery.zoom.min.js')}}"></script>
 		<script src="{{asset('frontend/js/main.js')}}"></script>
+
+       

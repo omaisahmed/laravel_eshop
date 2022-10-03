@@ -10,5 +10,7 @@
     @include('website.partials.foot')
     @include('website.partials.scripts')
 
+    @yield('scripts')
+
 	</body>
 </html>

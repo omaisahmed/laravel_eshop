@@ -6,18 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+// Website Routes
 Route::get('/',[SiteController::class, 'index'])->name('site.index');
 Route::get('/products',[SiteController::class, 'products'])->name('site.products');
 Route::get('/products/{slug}',[SiteController::class, 'show'])->name('site.show');
@@ -25,16 +14,15 @@ Route::get('/product/{productdetail}',[SiteController::class, 'product_detail'])
 Route::get('/categories',[SiteController::class, 'categories'])->name('site.categories');
 Route::get('/about',[SiteController::class, 'about'])->name('site.about');
 Route::get('/contact',[SiteController::class, 'contact'])->name('site.contact');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard.pages.index');
-// });
-
+Route::get('cart', [SiteController::class, 'cart'])->name('site.cart');
+Route::get('add-to-cart/{id}', [SiteController::class, 'addToCart'])->name('site.addtocart');
+Route::patch('update-cart', [SiteController::class, 'updateCart'])->name('site.updatecart');
+Route::delete('remove-from-cart', [SiteController::class, 'removeCart'])->name('site.removecart');
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Admin Dashboard Routes
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function(){
     Route::get('/dashboard',[AdminController::class, 'index'])->name('dashboard.index');
     Route::get('/category',[CategoryController::class, 'index'])->name('category.index');
