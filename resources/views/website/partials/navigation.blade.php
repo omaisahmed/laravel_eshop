@@ -35,14 +35,14 @@
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form>
+                            <form action="{{route('search.filter')}}" method="get">
                                 {{-- <select class="input-select">
                                     <option value="0">All Categories</option>
                                     <option value="1">Category 01</option>
                                     <option value="1">Category 02</option>
                                 </select> --}}
-                                <input class="input" placeholder="Search here">
-                                <button class="search-btn">Search</button>
+                                <input class="input" placeholder="Search here" name="name">
+                                <button type="submit" class="search-btn">Search</button>
                             </form>
                         </div>
                     </div>
@@ -96,14 +96,12 @@
                                         <h5>SUBTOTAL: ${{ $total }}</h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="{{route('site.cart', ['slug' => $product->slug])}}">View Cart</a>
+                                        <a href="{{route('site.cart', ['slug' => 'laptops'])}}">View Cart</a>
                                         {{-- @php $product_slug = session()->get('prod_slug') @endphp   --}}
-                                        <a href="{{ route('site.checkoutform', ['slug' => $product->slug]) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                        <a href="{{ route('site.checkoutform', ['slug' => 'laptops']) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
-                                
-                                
-                                
+                                                              
                             </div>
                             <!-- /Cart -->
 

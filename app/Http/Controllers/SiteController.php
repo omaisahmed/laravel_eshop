@@ -142,88 +142,6 @@ class SiteController extends Controller
             'applied_coupon' => $request->coupon,
         ]);
 
-        // \Stripe\Stripe::setApiKey('sk_test_51LbOBhC61iZeeTzoJX06OyjvKVGN4AeZxebq8hNUnAxZGmz6D2sodaGdY2L9hN3DJcvxUDVomamDPTfvCu7259qp00z9uFim0d');
-
-        // try {
-        //     $customer = \Stripe\PaymentIntent::create([
-        //         'name' => $request->name,
-        //         'email' => $request->email,
-        //         'phone' => $request->phone
-        //     ]);
-
-        //     if ($request->amount > 0) {
-        //         $charge = \Stripe\PaymentIntent::create([
-        //             'currency' => 'USD',
-        //             'source' => $request->stripeToken,
-        //             'amount' => $request->amount,
-        //             'receipt_email' => $request->email,
-        //             'description' => $request->slug,
-        //             'payment_method_types' => ['card'],
-        //         ]);
-        //         $intent = $charge->client_secret;
-        //         session()->put('data_secret', $intent);
-        //         $order->status = 'paid';
-        //         $order->transactionId = $charge['id'];
-
-        //         return view('website.pages.order-invoice', compact('order', 'customer'));
-        //     }
-        //     else {
-        //             $order->status = 'free';
-        //             $order->transactionId = null;
-        //          }
-        
-        //         $order->amount = $request->amount;
-        //         $order->update();
-
-        // } catch (\Stripe\Exception\CardException $e) {
-        //     return redirect()->back()->withErrors('Errors! ' . $e->getMessage());
-        // }
-
-
-
-        // try {
-        //     $stripe = new \Stripe\StripeClient('sk_test_51LbOBhC61iZeeTzoJX06OyjvKVGN4AeZxebq8hNUnAxZGmz6D2sodaGdY2L9hN3DJcvxUDVomamDPTfvCu7259qp00z9uFim0d');
-            
-        //     $customer = $stripe->customers->create([
-        //         'name' => $request->name,
-        //         'email' => $request->email,
-        //         'phone' => $request->phone
-        //     ]);
-
-        
-        //     if ($request->amount > 0) {
-        //         $charge = $stripe->charges->create([
-        //             'currency' => 'USD',
-        //             'source' => $request->stripeToken,
-        //             'amount' => $request->amount,
-        //             'receipt_email' => $request->email,
-        //             'description' => $request->slug,
-        //         ]);
-        //         $order->status = 'paid';
-        //         $order->transactionId = $charge['id'];
-        //     } else {
-        //         $order->status = 'free';
-        //         $order->transactionId = null;
-        //     }
-
-        //     $order->amount = $request->amount;
-        //     $order->update();
-        //     //$product = Products::where('slug', $request->slug)->first();
-
-        //     //customer email
-        //     // Mail::to($order->customerEmail)->send(new customerInvoice($order));
-
-        //     //admin mail
-        //     // Mail::to('hello@amzonestep.com')->send(new serviceAdminOrder($order));
-
-        //     // return view('website.pages.order-invoice', compact('order', 'package', 'customer'));
-        //     return $customer;
-        // } 
-        // catch (CardErrorException $e) {
-        //     return redirect()->back()->withErrors('Errors! ' . $e->getMessage());
-        // }
-
-
         try {
         Stripe::setApiKey(config('services.stripe.secret'));
 
@@ -253,9 +171,6 @@ class SiteController extends Controller
         $order->update();
         $product = Products::where('slug', $prod_slug)->first();
         return view('website.pages.order-invoice', compact('order', 'product', 'customer', 'charge'));
-
-        // session()->flash('success', 'Payment Successfull!');  
-        // return back();
     }
     catch (CardErrorException $e) {
             return redirect()->back()->withErrors('Errors! ' . $e->getMessage());
@@ -295,6 +210,24 @@ class SiteController extends Controller
             'percent' => 20
         ]);
         return "Coupon has been created.". $coupon;
+    }
+
+    public function searchFilter(Request $request){
+        $categories = Category::all()->where('status', '1');
+        $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
+        $search = Products::query();
+        $name = $request->name;
+
+        if($name) {
+             $search->where('name','LIKE','%'.$name.'%')->orWhere('slug','LIKE','%'.$name.'%');
+        }
+
+       $data = [
+        'name' => $name,
+        'search' => $search->latest()->simplePaginate(20),
+    ];
+
+        return view('website.pages.search', compact('categories', 'products'), $data);
     }
 
 }

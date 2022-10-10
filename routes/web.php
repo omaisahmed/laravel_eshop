@@ -23,7 +23,9 @@ Route::get('/checkout/{slug}',[SiteController::class, 'checkoutForm'])->name('si
 Route::post('checkout/submit',[SiteController::class, 'checkout'])->name('site.checkout');
 Route::get('/checkout/{slug}/{coupon}',[SiteController::class, 'checkoutCoupon'])->name('site.checkoutCoupon');
 Route::post('/checkout/{slug}/coupon',[SiteController::class, 'checkoutCouponSubmit'])->name('site.checkoutCouponSubmit');
-Route::get('/create-coupon',[SiteController::class, 'createCoupon']);
+Route::get('/search',[SiteController::class,'searchFilter'])->name('search.filter');;
+// Route::get('/search-filter',[SiteController::class,'searchFilterSubmit'])->name('search.filter');
+//Route::get('/create-coupon',[SiteController::class, 'createCoupon']);
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

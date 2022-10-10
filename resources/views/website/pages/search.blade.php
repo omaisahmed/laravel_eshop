@@ -40,24 +40,23 @@
 						<div class="row">
                             
 							<!-- product -->
-                            @foreach ($products as $product)
-                            @if($product->slug == $slug)
+                            @forelse ($search as $filter)
                             <div class="col-md-4 col-xs-6">
                             <div class="product">
                                 <div class="product-img">
-                                    <img src="{{asset('frontend/assets/uploads/products/'.$product->image)}}" alt="{{$product->meta_title}}" class="img-responsive product-image">
+                                    <img src="{{asset('frontend/assets/uploads/products/'.$filter->image)}}" alt="{{$filter->meta_title}}" class="img-responsive product-image">
                                     <div class="product-label">
                                         {{-- <span class="sale">-30%</span> --}}
-                                        @if ($product->trending == 1)
+                                        @if ($filter->trending == 1)
                                          <span class="new">POPULAR</span>
                                         @endif
                                         
                                     </div>
                                 </div>
                                 <div class="product-body">
-                                    <p class="product-category">{{$product->category->name}}</p>
-                                    <h3 class="product-name"><a href="{{route('site.productdetail',$product->name)}}">{{$product->name}}</a></h3>
-                                    <h4 class="product-price">${{$product->selling_price}} <del class="product-old-price">${{$product->original_price}}</del></h4>
+                                    <p class="product-category">{{$filter->category->name}}</p>
+                                    <h3 class="product-name"><a href="{{route('site.productdetail',$filter->name)}}">{{$filter->name}}</a></h3>
+                                    <h4 class="product-price">${{$filter->selling_price}} <del class="product-old-price">${{$filter->original_price}}</del></h4>
                                     <div class="product-rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -68,28 +67,26 @@
                                     <div class="product-btns">
                                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                        <button class="quick-view"><a href="{{route('site.productdetail',$product->name)}}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
+                                        <button class="quick-view"><a href="{{route('site.productdetail',$filter->name)}}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
-                                    <button class="add-to-cart-btn"><a class="text-white" href="{{route('site.addtocart',$product->id)}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
+                                    <button class="add-to-cart-btn"><a class="text-white" href="{{route('site.addtocart',$filter->id)}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
                                 </div>
                                 
                             </div>
                             </div>
-                            @endif                                 
-                            @endforeach
-                            
+                            @empty
+                            <div class="col-md-4 col-xs-6">
+                                <p>No Record Found</p>   
+                            </div>                     
+                            @endforelse                            
                             <!-- /product -->
                             
 							<div class="clearfix visible-sm visible-xs"></div>
 	
 						</div>
 						<!-- /store products -->
-
-                        <div class="text-right">
-                        {!! $pagination->links() !!}
-                        </div>
 					
 					</div>
 					<!-- /STORE -->
