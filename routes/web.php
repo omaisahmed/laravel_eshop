@@ -5,19 +5,25 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
+use Illuminate\Support\Facades\Auth;
 
 // Website Routes
 Route::get('/',[SiteController::class, 'index'])->name('site.index');
 Route::get('/products',[SiteController::class, 'products'])->name('site.products');
-Route::get('/products/{slug}',[SiteController::class, 'show'])->name('site.show');
+Route::get('/products/{slug}',[SiteController::class, 'product_show'])->name('site.show');
 Route::get('/product/{productdetail}',[SiteController::class, 'product_detail'])->name('site.productdetail');
 Route::get('/categories',[SiteController::class, 'categories'])->name('site.categories');
 Route::get('/about',[SiteController::class, 'about'])->name('site.about');
 Route::get('/contact',[SiteController::class, 'contact'])->name('site.contact');
-Route::get('cart', [SiteController::class, 'cart'])->name('site.cart');
+Route::get('/cart/{slug}', [SiteController::class, 'cart'])->name('site.cart');
 Route::get('add-to-cart/{id}', [SiteController::class, 'addToCart'])->name('site.addtocart');
 Route::patch('update-cart', [SiteController::class, 'updateCart'])->name('site.updatecart');
 Route::delete('remove-from-cart', [SiteController::class, 'removeCart'])->name('site.removecart');
+Route::get('/checkout/{slug}',[SiteController::class, 'checkoutForm'])->name('site.checkoutform');
+Route::post('checkout/submit',[SiteController::class, 'checkout'])->name('site.checkout');
+Route::get('/checkout/{slug}/{coupon}',[SiteController::class, 'checkoutCoupon'])->name('site.checkoutCoupon');
+Route::post('/checkout/{slug}/coupon',[SiteController::class, 'checkoutCouponSubmit'])->name('site.checkoutCouponSubmit');
+Route::get('/create-coupon',[SiteController::class, 'createCoupon']);
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

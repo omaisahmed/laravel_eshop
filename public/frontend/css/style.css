@@ -2211,10 +2211,24 @@ textarea.input {
 .text-white{
   color: white;
 }
+
 .dropdown-toggle{
   cursor: pointer;
 }
 .cart-product-txt {
   padding-top: 40px !important;
   padding-bottom: 40px !important;
+}
+
+.coupon-btn {
+  margin-top: 10px;
+}
+
+.payment-txt {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.applied-coupon-text{
+  background-color: #eeee;
+  padding: 0px 10px 0px 10px;
 }

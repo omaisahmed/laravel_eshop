@@ -77,7 +77,7 @@
                                     <div class="cart-list">
                                         @if(session('cart'))
                                         @foreach(session('cart') as $id => $details)
-                                        <div class="product-widget">
+                                        <div class="product-widget" data-id="{{ $id }}">
                                             <div class="product-img">
                                                 <img src="{{asset('frontend/assets/uploads/products/'.$details['image'])}}">
                                             </div>
@@ -85,7 +85,8 @@
                                                 <h3 class="product-name"><a href="{{route('site.productdetail',$details['name'])}}">{{ $details['name'] }}</a></h3>
                                                 <h4 class="product-price"><span class="qty">{{ $details['qty'] }}x</span>${{ $details['selling_price'] }}</h4>
                                             </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                            <button class="delete remove-from-cart"><i class="fa fa-close"></i></button>
+                                            
                                         </div>
                                         @endforeach
                                         @endif                                                                               
@@ -95,8 +96,9 @@
                                         <h5>SUBTOTAL: ${{ $total }}</h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="{{route('site.cart')}}">View Cart</a>
-                                        <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                        <a href="{{route('site.cart', ['slug' => $product->slug])}}">View Cart</a>
+                                        {{-- @php $product_slug = session()->get('prod_slug') @endphp   --}}
+                                        <a href="{{ route('site.checkoutform', ['slug' => $product->slug]) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                 
@@ -146,3 +148,30 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
+
+        @section('scripts')
+        <!--Cart Delete -->
+        <script>   
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+    
+            var ele = $(this);
+    
+            if(confirm("Are you sure want to remove?")) {
+                $.ajax({
+                    url: '{{ route('site.removecart') }}',
+                    method: "DELETE",
+                    data: {
+                        _token: '{{ csrf_token() }}', 
+                        id: ele.parents("div").attr("data-id")
+                    },
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });	
+        </script>	  
+        <!--Cart Delete -->
+        @endsection
+    
