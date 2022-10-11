@@ -64,6 +64,15 @@ class SiteController extends Controller
     {
         return view('website.pages.contact');
     }
+    
+    public function privacy_policy()
+    {
+        return view('website.pages.privacy-policy');
+    }
+    public function terms_conditions()
+    {
+        return view('website.pages.terms-conditions');
+    }
 
     public function cart($slug)
     {  
@@ -108,6 +117,49 @@ class SiteController extends Controller
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product removed successfully');
+        }
+    }
+    
+    public function wishlist()
+    {  
+        return view('website.pages.wishlist');
+    }
+    public function addToWishlist($id)
+    {
+        $product = Products::findOrFail($id);
+        $wishlist = session()->get('wishlist', []);
+        if (isset($wishlist[$id])) {
+            $wishlist[$id]['qty']++;
+        } else {
+            $wishlist[$id] = [
+                "name" => $product->name,
+                "qty" => 1,
+                "selling_price" => $product->selling_price,
+                "image" => $product->image,
+            ];
+        }
+        session()->put('wishlist', $wishlist);
+        return redirect()->back()->with('success', 'Product added to wishlist successfully!');
+    }
+    public function updateWishlist(Request $request)
+    {
+        if ($request->id && $request->qty) {
+            $wishlist = session()->get('wishlist');
+            $wishlist[$request->id]["qty"] = $request->qty;
+            session()->put('wishlist', $wishlist);
+            session()->flash('success', 'Product updated in wishlist successfully');
+        }
+    }
+
+    public function removeWishlist(Request $request)
+    {
+        if ($request->id) {
+            $wishlist = session()->get('wishlist');
+            if (isset($wishlist[$request->id])) {
+                unset($wishlist[$request->id]);
+                session()->put('wishlist', $wishlist);
+            }
+            session()->flash('success', 'Product removed from wishlist successfully');
         }
     }
 

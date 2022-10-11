@@ -79,7 +79,7 @@
 							</div>
 							<p>{{$product->small_description}}</p>
 
-							<div class="product-options">
+							{{-- <div class="product-options">
 								<label>
 									Size
 									<select class="input-select">
@@ -92,29 +92,28 @@
 										<option value="0">Red</option>
 									</select>
 								</label>
-							</div>
+							</div> --}}
 
 							<div class="add-to-cart">
-								<div class="qty-label">
+								{{-- <div class="qty-label">
 									Qty
 									<div class="input-number">
 										<input type="number">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
-								</div>
+								</div> --}}
 								<button class="add-to-cart-btn"><a class="text-white" href="{{route('site.addtocart',$product->id)}}"><i class="fa fa-shopping-cart"></i> add to cart</a></button>
 							</div>
 
 							<ul class="product-btns">
-								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+								<li><a href="{{route('site.addtowishlist',$product->id)}}"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
 							</ul>
 
 							<ul class="product-links">
 								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
+								<li><a href="/products/{{$product->slug}}">{{$product->category->name}}</a></li>
 							</ul>
 
 							<ul class="product-links">
@@ -391,7 +390,7 @@
 								<i class="fa fa-star"></i>
 							</div>
 							<div class="product-btns">
-								<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+								<button class="add-to-wishlist"><a href="{{route('site.addtowishlist',$product->id)}}"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
 								<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
 								<button class="quick-view"><a href="{{route('site.productdetail',$productRelated->name)}}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
 							</div>
@@ -413,3 +412,5 @@
 		<!-- /Section -->
 		
     @endsection
+
+	

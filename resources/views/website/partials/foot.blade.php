@@ -9,24 +9,22 @@
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <p>Eshop established in 1998 and based in Redmond, Wash., is a wholly owned subsidiary of Nintendo Co., Ltd. We are committed to delivering best-in-class products and services to our customers.</p>
                         <ul class="footer-links">
                             <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            <li><a href="tel:+021-95-51-84"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                            <li><a href="mailto:info@eshop.com"><i class="fa fa-envelope-o"></i>info@eshop.com</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">Categories</h3>
+                        <h3 class="footer-title">Categories</h3>                            
                         <ul class="footer-links">
-                            <li><a href="#">Hot deals</a></li>
-                            <li><a href="#">Laptops</a></li>
-                            <li><a href="#">Smartphones</a></li>
-                            <li><a href="#">Cameras</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            @foreach ($cats as $cat)
+                            <li><a href="/products/{{$cat->slug}}">{{$cat->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -37,11 +35,10 @@
                     <div class="footer">
                         <h3 class="footer-title">Information</h3>
                         <ul class="footer-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Orders and Returns</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="{{route('site.about')}}">About Us</a></li>
+                            <li><a href="{{route('site.contact')}}">Contact Us</a></li>
+                            <li><a href="{{route('site.privacy-policy')}}">Privacy Policy</a></li>
+                            <li><a href="{{route('site.terms-conditions')}}">Terms & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -50,11 +47,11 @@
                     <div class="footer">
                         <h3 class="footer-title">Service</h3>
                         <ul class="footer-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">View Cart</a></li>
+                            {{-- <li><a href="#">My Account</a></li> --}}
+                            <li><a href="{{route('site.cart', ['slug' => $prods->slug])}}">View Cart</a></li>
                             <li><a href="#">Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
+                            {{-- <li><a href="#">Track My Order</a></li> --}}
+                            <li><a href="{{route('site.contact')}}">Help</a></li>
                         </ul>
                     </div>
                 </div>
@@ -80,10 +77,7 @@
                         <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
                     </ul>
                     <span class="copyright">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>. 
-Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | Made by <a href="https://omaisahmed.github.io/folio" target="_blank">Omais Ahmed</a>
                     </span>
                 </div>
             </div>

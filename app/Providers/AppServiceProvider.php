@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use DB;
+use App\Models\Category;
+use App\Models\Products;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +29,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        View::composer('*', function ($view) {
+            $cats = Category::where('status', '1')->get();
+            $prods = Products::where('status', '1')->first();
+            $view->with('cats', $cats);
+            $view->with('prods',$prods);
+        });
     }
 }

@@ -15,6 +15,8 @@ Route::get('/product/{productdetail}',[SiteController::class, 'product_detail'])
 Route::get('/categories',[SiteController::class, 'categories'])->name('site.categories');
 Route::get('/about',[SiteController::class, 'about'])->name('site.about');
 Route::get('/contact',[SiteController::class, 'contact'])->name('site.contact');
+Route::get('/privacy-policy',[SiteController::class, 'privacy_policy'])->name('site.privacy-policy');
+Route::get('/terms-conditions',[SiteController::class, 'terms_conditions'])->name('site.terms-conditions');
 Route::get('/cart/{slug}', [SiteController::class, 'cart'])->name('site.cart');
 Route::get('add-to-cart/{id}', [SiteController::class, 'addToCart'])->name('site.addtocart');
 Route::patch('update-cart', [SiteController::class, 'updateCart'])->name('site.updatecart');
@@ -23,8 +25,11 @@ Route::get('/checkout/{slug}',[SiteController::class, 'checkoutForm'])->name('si
 Route::post('checkout/submit',[SiteController::class, 'checkout'])->name('site.checkout');
 Route::get('/checkout/{slug}/{coupon}',[SiteController::class, 'checkoutCoupon'])->name('site.checkoutCoupon');
 Route::post('/checkout/{slug}/coupon',[SiteController::class, 'checkoutCouponSubmit'])->name('site.checkoutCouponSubmit');
-Route::get('/search',[SiteController::class,'searchFilter'])->name('search.filter');;
-// Route::get('/search-filter',[SiteController::class,'searchFilterSubmit'])->name('search.filter');
+Route::get('/search',[SiteController::class,'searchFilter'])->name('search.filter');
+Route::get('/wishlist', [SiteController::class, 'wishlist'])->name('site.wishlist');
+Route::get('add-to-wishlist/{id}', [SiteController::class, 'addToWishlist'])->name('site.addtowishlist');
+Route::patch('update-wishlist', [SiteController::class, 'updateWishlist'])->name('site.updatewishlist');
+Route::delete('remove-from-wishlist', [SiteController::class, 'removeWishlist'])->name('site.removewishlist');
 //Route::get('/create-coupon',[SiteController::class, 'createCoupon']);
 
 Auth::routes();

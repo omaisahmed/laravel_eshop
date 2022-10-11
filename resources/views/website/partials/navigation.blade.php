@@ -8,10 +8,10 @@
                     <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
                     <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
                 </ul>
-                <ul class="header-links pull-right">
+                {{-- <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                     <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
         <!-- /TOP HEADER -->
@@ -53,10 +53,10 @@
                         <div class="header-ctn">
                             <!-- Wishlist -->
                             <div>
-                                <a href="#">
+                                <a href="{{route('site.wishlist')}}">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
-                                    <div class="qty">2</div>
+                                    <div class="qty">{{ count((array) session('wishlist')) }}</div>
                                 </a>
                             </div>
                             <!-- /Wishlist -->
@@ -96,9 +96,9 @@
                                         <h5>SUBTOTAL: ${{ $total }}</h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="{{route('site.cart', ['slug' => 'laptops'])}}">View Cart</a>
+                                        <a href="{{route('site.cart', ['slug' => $prods->slug])}}">View Cart</a>
                                         {{-- @php $product_slug = session()->get('prod_slug') @endphp   --}}
-                                        <a href="{{ route('site.checkoutform', ['slug' => 'laptops']) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                        <a href="{{ route('site.checkoutform', ['slug' => $prods->slug]) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                                               
