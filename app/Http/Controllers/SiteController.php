@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Stripe\Charge;
 use Stripe\Stripe;
+use Stripe\Customer;
 use App\Models\Orders;
+use App\Models\Coupons;
 use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Cartalyst\Stripe\Exception\CardErrorException;
-use Stripe\Customer;
-use App\Models\Coupons;
 
 class SiteController extends Controller
 {
@@ -35,6 +36,23 @@ class SiteController extends Controller
         $pagination = Products::latest()->paginate(5);
         $categories = Category::all()->where('status', '1');
         return view('website.pages.categories', compact('categories', 'products', 'pagination'));
+    }
+    
+    public function categories_show(Request $request)
+    {
+        // foreach($request->cat as $cats => $val){
+        //     dd($val);
+
+        // }
+    //    dd($request->cat);
+        $postCategories = Products::where('slug',$request->cat)->get();
+        // $postCat = json_encode(array('data'=>$prod));
+        // $postCategories = json_decode($postCat);
+
+        $categories = Category::all()->where('status', '1');
+        $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
+        return view('website.pages.categories-show', compact('categories','products','postCategories'));   
+     
     }
 
     public function product_show($slug)

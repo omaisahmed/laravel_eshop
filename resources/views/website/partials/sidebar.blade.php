@@ -1,19 +1,24 @@
 <!-- ASIDE -->
+<div class="catFilters"></div>
+
 <div id="aside" class="col-md-3">
     <!-- aside Widget -->
     <div class="aside">
         <h3 class="aside-title">Categories</h3>
         <div class="checkbox-filter">
+            <form action="{{route('site.categories_show')}}" method="GET"> 
             @foreach ($categories as $category)
             <div class="input-checkbox">
-                <input type="checkbox" id="category-1">
-                <label for="category-1">
+                <input type="checkbox" onclick="this.form.submit()" name="cat[]" value="{{ $category->slug }}" id="{{$category->id}}" >
+                
+                <label for="{{$category->id}}">
                     <span></span>
                     {{$category->name}}
                     <small>({{ $category->products->count() }})</small>
                 </label>
             </div>
-            @endforeach						
+            @endforeach
+            </form>					
         </div>
     </div>
     <!-- /aside Widget -->
@@ -58,4 +63,46 @@
     </div>
     <!-- /aside Widget -->
 </div>
+
 <!-- /ASIDE -->
+
+@section('scripts')
+<script>
+    function categoryCheckbox(id) {
+        $('.catFilters').empty();
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            type: 'GET',
+            url: '/categories-filter/' + id,
+            success: function(response) {
+                console.log(response);
+            },
+        });
+    }
+</script>
+
+
+{{-- <script>
+
+// var categories = [];
+// $('input[name="category[]"]').on('change', function (e) {
+//     e.preventDefault();
+//     categories = []; 
+//     $('input[name="category[]"]:checked').each(function()
+//     {
+//         categories.push($(this).val());
+//     });
+//     $.ajax({
+//         headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+//         type:'POST',
+//         url: '/categories-filter',
+//         data:{categories,_token: $('meta[name="csrf-token"]').attr('content')
+//         },
+//         success:function(data){
+//             alert(categories);
+//         }
+//     });
+//     });
+
+</script> --}}
+@endsection

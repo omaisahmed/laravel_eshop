@@ -13,6 +13,7 @@ Route::get('/products',[SiteController::class, 'products'])->name('site.products
 Route::get('/products/{slug}',[SiteController::class, 'product_show'])->name('site.show');
 Route::get('/product/{productdetail}',[SiteController::class, 'product_detail'])->name('site.productdetail');
 Route::get('/categories',[SiteController::class, 'categories'])->name('site.categories');
+Route::get('/categories-filter',[SiteController::class, 'categories_show'])->name('site.categories_show');
 Route::get('/about',[SiteController::class, 'about'])->name('site.about');
 Route::get('/contact',[SiteController::class, 'contact'])->name('site.contact');
 Route::get('/privacy-policy',[SiteController::class, 'privacy_policy'])->name('site.privacy-policy');
