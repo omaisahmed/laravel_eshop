@@ -25,8 +25,8 @@
                     <!-- LOGO -->
                     <div class="col-md-3">
                         <div class="header-logo">
-                            <a href="#" class="logo">
-                                <img src="{{asset('frontend/img/logo.png')}}" alt="Eshop">
+                            <a href="{{route('site.index')}}" class="logo">
+                                <img src="{{asset('frontend/img/logo.png')}}" alt="Eshop" class="img-responsive">
                             </a>
                         </div>
                     </div>

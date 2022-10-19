@@ -92,7 +92,7 @@ class ProductsController extends Controller
         $file->storeAs('frontend/assets/uploads/products' , $filename);
         $path = $file->storeAs('' , $filename);
         }
-        $products = new Products();
+        $products = Products::find($id);
         $products->cat_id = $request->cat_id;
         $products->name = $request->name;
         $products->slug = $request->slug;

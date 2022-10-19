@@ -33,9 +33,10 @@ class LoginController extends Controller
       if (Auth::user()->roles == '1')
        {
         return 'admin/dashboard';  // admin dashboard path
-       } else{
-        return '/home';  // member dashboard path
-      }
+       } 
+      //  else{
+      //   return '/home';  // member dashboard path
+      // }
     }
 
     /**

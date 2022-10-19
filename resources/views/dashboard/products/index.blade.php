@@ -66,10 +66,10 @@
                             <td>{{$product->name}}</td>
                             <td>{{$product->selling_price}}</td>
                             <td class="td-actions">
-                              <a href="/edit-product/{{$product->id}}" type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Edit Product">
+                              <a href="{{route('products.edit',$product->id)}}" type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Edit Product">
                                 <i class="material-icons">edit</i>
                               </a>
-                              <a href="/delete-product/{{$product->id}}" type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" data-original-title="Remove Product">
+                              <a href="{{route('products.delete',$product->id)}}" type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" data-original-title="Remove Product">
                                 <i class="material-icons">close</i>
                               </a>
                             </td>

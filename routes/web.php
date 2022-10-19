@@ -5,6 +5,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Auth;
 
 // Website Routes
@@ -43,14 +44,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::get('/create-category',[CategoryController::class, 'create_category'])->name('category.create');
     Route::post('/create-category-submit',[CategoryController::class, 'create_category_submit'])->name('category.create.submit');
     Route::get('/edit-category/{id}',[CategoryController::class, 'edit_category'])->name('category.edit');
-    Route::post('/edit-category-submit/{id}',[CategoryController::class, 'edit_category_submit'])->name('category.edit.submit');
+    Route::patch('/edit-category-submit/{id}',[CategoryController::class, 'edit_category_submit'])->name('category.edit.submit');
     Route::get('/delete-category/{id}',[CategoryController::class, 'delete_category'])->name('category.delete');
     Route::get('/products',[ProductsController::class, 'index'])->name('products.index');
     Route::get('/create-product',[ProductsController::class, 'create_product'])->name('products.create');
     Route::post('/create-product-submit',[ProductsController::class, 'create_product_submit'])->name('products.create.submit');
     Route::get('/edit-product/{id}',[ProductsController::class, 'edit_product'])->name('products.edit');
-    Route::post('/edit-product-submit/{id}',[ProductsController::class, 'edit_product_submit'])->name('products.edit.submit');
+    Route::patch('/edit-product-submit/{id}',[ProductsController::class, 'edit_product_submit'])->name('products.edit.submit');
     Route::get('/delete-product/{id}',[ProductsController::class, 'delete_product'])->name('products.delete');
+    Route::get('/users',[UsersController::class, 'index'])->name('users.index');
+    Route::get('/create-user',[UsersController::class, 'create_user'])->name('user.create');
+    Route::post('/create-user-submit',[UsersController::class, 'create_user_submit'])->name('user.create.submit');
+    Route::get('/edit-user/{id}',[UsersController::class, 'edit_user'])->name('user.edit');
+    Route::patch('/edit-user-submit/{id}',[UsersController::class, 'edit_user_submit'])->name('user.edit.submit');
+    Route::get('/delete-user/{id}',[UsersController::class, 'delete_user'])->name('user.delete');
   });
 
 

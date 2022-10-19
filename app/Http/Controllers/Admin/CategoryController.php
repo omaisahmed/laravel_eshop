@@ -70,7 +70,7 @@ class CategoryController extends Controller
         $file->storeAs('frontend/assets/uploads/category' , $filename);
         $path = $file->storeAs('' , $filename);
         }
-        $category = new Category();
+        $category = Category::find($id);
         $category->name = $request->name;
         $category->slug = $request->slug;
         $category->description = $request->description;

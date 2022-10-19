@@ -24,6 +24,7 @@
         @endif
         <form action="{{route('products.edit.submit', $product->id)}}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="row">
                 <div class="col-md-12 my-3">
                   <div class="form-group">

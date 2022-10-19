@@ -24,6 +24,7 @@
         @endif
         <form action="{{route('category.edit.submit', $category->id)}}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
           <div class="row">
             <div class="col-md-6 my-3">
               <div class="form-group bmd-form-group">

@@ -4,70 +4,74 @@
     <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <a href="{{route('category.create')}}" type="button" class="btn btn-warning pull-left"><i class="fa fa-plus my-auto" style="font-size: 0.9rem;"></i> Add Category</a>
+            <a href="{{route('user.create')}}" type="button" class="btn btn-warning pull-left"><i class="fa fa-plus my-auto" style="font-size: 0.9rem;"></i> Add User</a>
         </div>
     </div>
       <div class="row">
          <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">Category</h4>
-                <p class="card-category"> All Categories</p>
+                <h4 class="card-title ">Users</h4>
+                <p class="card-category"> All Users</p>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table">
-                    @if(Session::has('delete_category'))
+                    @if(Session::has('delete_user'))
                     <div class="alert alert-danger">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="material-icons">close</i>
                       </button>
                       <span>
-                        {{Session::get('delete_category')}}
+                        {{Session::get('delete_user')}}
                       </span>
                     </div>
                     @endif
-                    @if(Session::has('create_category'))
+                    @if(Session::has('create_user'))
                       <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                            <i class="material-icons">close</i>
                         </button>
                       <span>
-                         {{Session::get('create_category')}}
+                         {{Session::get('create_user')}}
                       </span>
                       </div>
                     @endif
-                    @if(Session::has('edit_category'))
+                    @if(Session::has('edit_user'))
                       <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                            <i class="material-icons">close</i>
                         </button>
                       <span>
-                         {{Session::get('edit_category')}}
+                         {{Session::get('edit_user')}}
                       </span>
                       </div>
                     @endif
                     <thead class="text-primary">
                       <tr>
                         <th>ID</th>
-                        <th>Image</th>
                         <th>Name</th>
-                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
+                        @foreach($users as $user)
                         <tr>
-                            <td>{{$category->id}}</td>
-                            <td><img src="/frontend/assets/uploads/category/{{$category->image}}" class="img-responsive" width="100" height="100"></td>
-                            <td>{{$category->name}}</td>
-                            <td>{{$category->status}}</td>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            @if ($user->roles == 1)
+                            <td>Admin</td>
+                            @elseif ($user->roles == 2)
+                            <td>User</td>
+                            @endif
                             <td class="td-actions">
-                              <a href="{{route('category.edit',$category->id)}}" type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Edit Category">
+                              <a href="{{route('user.edit',$user->id)}}" type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Edit User">
                                 <i class="material-icons">edit</i>
                               </a>
-                              <a href="{{route('category.delete',$category->id)}}" type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" data-original-title="Remove Category">
+                              <a href="{{route('user.delete',$user->id)}}" type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" data-original-title="Remove User">
                                 <i class="material-icons">close</i>
                               </a>
                             </td>
