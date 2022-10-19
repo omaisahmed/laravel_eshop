@@ -96,9 +96,9 @@
                                         <h5>SUBTOTAL: ${{ $total }}</h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="{{route('site.cart', ['slug' => $prods->slug])}}">View Cart</a>
+                                        <a href="{{route('site.cart', ['slug' => 'laptops'])}}">View Cart</a>
                                         {{-- @php $product_slug = session()->get('prod_slug') @endphp   --}}
-                                        <a href="{{ route('site.checkoutform', ['slug' => $prods->slug]) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                        <a href="{{ route('site.checkoutform', ['slug' => 'laptops']) }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                                               
