@@ -40,15 +40,7 @@ class SiteController extends Controller
     
     public function categories_show(Request $request)
     {
-        // foreach($request->cat as $cats => $val){
-        //     dd($val);
-
-        // }
-    //    dd($request->cat);
         $postCategories = Products::where('slug',$request->cat)->get();
-        // $postCat = json_encode(array('data'=>$prod));
-        // $postCategories = json_decode($postCat);
-
         $categories = Category::all()->where('status', '1');
         $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
         return view('website.pages.categories-show', compact('categories','products','postCategories'));   
@@ -199,6 +191,7 @@ class SiteController extends Controller
         ]);
 
         $order = Orders::create([
+            'order_id' => random_int(100000, 999999),
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -271,15 +264,6 @@ class SiteController extends Controller
         } else {
             return redirect()->back()->with('error', 'Invalid Coupon Code');
         }
-    }
-
-    public function createCoupon()
-    {
-        $coupon = Coupons::create([
-            'code' => 'ESHOP20',
-            'percent' => 20
-        ]);
-        return "Coupon has been created.". $coupon;
     }
 
     public function searchFilter(Request $request){

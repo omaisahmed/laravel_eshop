@@ -1,12 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\CouponsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
-use App\Http\Controllers\Admin\UsersController;
-use Illuminate\Support\Facades\Auth;
 
 // Website Routes
 Route::get('/',[SiteController::class, 'index'])->name('site.index');
@@ -32,7 +34,6 @@ Route::get('/wishlist', [SiteController::class, 'wishlist'])->name('site.wishlis
 Route::get('add-to-wishlist/{id}', [SiteController::class, 'addToWishlist'])->name('site.addtowishlist');
 Route::patch('update-wishlist', [SiteController::class, 'updateWishlist'])->name('site.updatewishlist');
 Route::delete('remove-from-wishlist', [SiteController::class, 'removeWishlist'])->name('site.removewishlist');
-//Route::get('/create-coupon',[SiteController::class, 'createCoupon']);
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -58,6 +59,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::get('/edit-user/{id}',[UsersController::class, 'edit_user'])->name('user.edit');
     Route::patch('/edit-user-submit/{id}',[UsersController::class, 'edit_user_submit'])->name('user.edit.submit');
     Route::get('/delete-user/{id}',[UsersController::class, 'delete_user'])->name('user.delete');
+    Route::get('/orders',[OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/delete-order/{id}',[OrdersController::class, 'delete_order'])->name('order.delete');
+    Route::get('/order-status', [OrdersController::class, 'order_status'])->name('order.status');
+    Route::get('/coupons',[CouponsController::class, 'index'])->name('coupon.index');
+    Route::get('/create-coupon',[CouponsController::class, 'create_coupon'])->name('coupon.create');
+    Route::post('/create-coupon-submit',[CouponsController::class, 'create_coupon_submit'])->name('coupon.create.submit');
+    Route::get('/delete-coupon/{id}',[CouponsController::class, 'delete_coupon'])->name('coupon.delete');
   });
 
 
