@@ -49,8 +49,7 @@
                         <ul class="footer-links">
                             {{-- <li><a href="#">My Account</a></li> --}}
                             <li><a href="{{route('site.cart', ['slug' => "laptops"])}}">View Cart</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                            {{-- <li><a href="#">Track My Order</a></li> --}}
+                            <li><a href="{{route('site.wishlist')}}">Wishlist</a></li>
                             <li><a href="{{route('site.contact')}}">Help</a></li>
                         </ul>
                     </div>

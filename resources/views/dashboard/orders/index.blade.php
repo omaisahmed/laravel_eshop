@@ -2,11 +2,6 @@
 @section('content')
 <div class="content">
     <div class="container-fluid">
-    {{-- <div class="row">
-        <div class="col-lg-12">
-            <a href="{{route('orders.create')}}" type="button" class="btn btn-warning pull-left"><i class="fa fa-plus my-auto" style="font-size: 0.9rem;"></i> Add Orders</a>
-        </div>
-    </div> --}}
       <div class="row">
          <div class="col-md-12">
             <div class="card">
@@ -33,7 +28,7 @@
                         <th>Order ID</th>
                         <th>Date</th>
                         <th>Name</th>
-                        <th>Location</th>
+                        <th>Address</th>
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -50,6 +45,9 @@
                             <td>{{$order->amount}}</td>
                             <td><input data-id="{{$order->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Paid" data-off="Unpaid" {{ $order->status === 'paid' ? 'checked' : '' }}></td>
                             <td class="td-actions">
+                              <a href="{{route('order.view',$order->id)}}" type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="View Order">
+                                <i class="material-icons">visibility</i>
+                              </a>
                               <a href="{{route('order.delete',$order->id)}}" type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" data-original-title="Remove Order">
                                 <i class="material-icons">close</i>
                               </a>

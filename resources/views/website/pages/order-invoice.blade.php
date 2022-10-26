@@ -29,8 +29,8 @@
                                 <td>{{ $order->phone }}</td>
                             </tr>
                             <tr>
-                                <td>Product</td>
-                                <td>{{ $order->slug }}</td>                                                               
+                                <td>Products</td>
+                                <td>{{ $order->products }}</td>                                                               
                             </tr>
                             <td>Total Amount</td>
                             <td>${{ $charge->amount }}</td>

@@ -183,7 +183,15 @@ class SiteController extends Controller
     {
         $amount = session()->get('amount');
         $prod_slug = session()->get('prod_slug');
-       
+        $products_in_cart = array();
+        if(session('cart')){
+            foreach(session('cart') as $details){
+                $products_in_cart[] = $details['name'];
+                $prod = implode(" ",$products_in_cart);           
+            } 
+        }
+        
+     
         $request->validate([
             'name' => 'required',
             'email' => 'required | email',
@@ -198,6 +206,7 @@ class SiteController extends Controller
             'address' => $request->address,
             'country' => $request->country,
             'amount' => $amount,
+            'products' => $prod,
             'slug' => $prod_slug,
             'transactionId' => 'null',
             'status' => 'unpaid',

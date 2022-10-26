@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::patch('/edit-user-submit/{id}',[UsersController::class, 'edit_user_submit'])->name('user.edit.submit');
     Route::get('/delete-user/{id}',[UsersController::class, 'delete_user'])->name('user.delete');
     Route::get('/orders',[OrdersController::class, 'index'])->name('orders.index');
+    Route::get('/view-order/{id}',[OrdersController::class, 'view_order'])->name('order.view');
+    Route::get('/invoice-order/{id}',[OrdersController::class, 'invoice_order'])->name('order.invoice');
     Route::get('/delete-order/{id}',[OrdersController::class, 'delete_order'])->name('order.delete');
     Route::get('/order-status', [OrdersController::class, 'order_status'])->name('order.status');
     Route::get('/coupons',[CouponsController::class, 'index'])->name('coupon.index');
