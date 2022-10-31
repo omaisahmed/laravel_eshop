@@ -56,7 +56,7 @@
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <td>{{$order->created_at}}</td>
+                            <td>{{$order->created_at->format('d-m-Y')}}</td>
                         </tr>
                   </table>
                 </div>

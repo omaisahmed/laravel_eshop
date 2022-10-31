@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->bigInteger('order_id')->unique()->after('id');
+        Schema::create('laravisits', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('visitable');
+            $table->json('data');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('laravisits');
     }
 };

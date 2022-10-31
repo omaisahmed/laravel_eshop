@@ -19814,3 +19814,7 @@ input:checked + .sliderCheckbox:before {
 .sliderCheckbox.round:before {
   border-radius: 50%;
 }
+
+.chartGraph{
+  height: 200px !important;
+}

@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Coderflex\Laravisit\Concerns\CanVisit;
+use Coderflex\Laravisit\Concerns\HasVisits;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Products extends Model
+class Products extends Model implements CanVisit
 {
     use HasFactory;
+    use HasVisits;
     protected $table = "products";
     protected $fillable = [
         'cat_id',

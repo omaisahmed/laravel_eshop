@@ -8,6 +8,8 @@
         "php": "^8.0.2",
         "barryvdh/laravel-dompdf": "^2.0",
         "cartalyst/stripe-laravel": "^14.0",
+        "coderflexx/laravisit": "^1.2",
+        "consoletvs/charts": "6.*",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",

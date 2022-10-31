@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('country')->nullable();
             $table->string('amount');
-            $table->string('products');
             $table->string('slug');
             $table->string('transactionId')->nullable();
             $table->string('status')->nullable();

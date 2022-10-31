@@ -17,6 +17,9 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table">
+                    @foreach ($prod as $pro)
+                      {{$pro->visit_count_total}}
+                    @endforeach
                     @if(Session::has('delete_products'))
                     <div class="alert alert-danger">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ESHOP</title>
+    <title>Electro</title>
 </head>
 <style type="text/css">
     body{
@@ -93,7 +93,7 @@
     <div class="w-50 float-left mt-10">
         <p class="m-0 pt-5 text-bold w-100">Invoice Id - <span class="gray-color">#{{$order->transactionId}}</span></p>
         <p class="m-0 pt-5 text-bold w-100">Order Id - <span class="gray-color">#{{$order->order_id}}</span></p>
-        <p class="m-0 pt-5 text-bold w-100">Order Date - <span class="gray-color">{{$order->created_at}}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Order Date - <span class="gray-color">{{$order->created_at->format('d-m-Y')}}</span></p>
     </div>
     <div class="w-50 float-left logo mt-10">
         {{-- <img src="{{asset('frontend/img/logo-dashboard.png')}}" alt="Eshop" class="img-responsive"> <span>Eletro.com</span>      --}}

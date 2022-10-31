@@ -12,8 +12,10 @@ class ProductsController extends Controller
 {
     public function index()
     {
+       $prod = Products::withTotalVisitCount()->get();
+    //    dd($prod->visit_count_total);
         $products = Products::all();
-        return view('dashboard.products.index',compact('products'));
+        return view('dashboard.products.index',compact('products','prod'));
     }
 
     public function create_product()
