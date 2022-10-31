@@ -32,6 +32,9 @@ class AdminController extends Controller
         $today_sales_chart->dataset('Sales', 'bar', [$sales_2_days_ago, $yesterday_sales, $today_sales])->options([
             'color' => '#F9FCF9',
             'backgroundColor' => '#F9FCF9',
+            'responsive' => true,
+            'scaleFontColor' => '#ffffff',
+            'pointLabelFontColor' => '#FFFFFF',
         ]);
 
         $monthly_revenue = Orders::where('status','paid')->whereDate('created_at', Carbon::now('m'))->sum('amount');
@@ -40,6 +43,7 @@ class AdminController extends Controller
         $monthly_revenue_chart->dataset('Revenue', 'bar', [$monthly_revenue])->options([
             'color' => '#F9FCF9',
             'backgroundColor' => '#F9FCF9',
+            'responsive' => true
         ]);
 
         $monthly_sales = Orders::where('status','paid')->whereDate('created_at', Carbon::now('m'))->count();
@@ -48,6 +52,8 @@ class AdminController extends Controller
         $monthly_sales_chart->dataset('Sales', 'bar', [$monthly_sales])->options([
             'color' => '#F9FCF9',
             'backgroundColor' => '#F9FCF9',
+            'animation' => false,
+            'responsive' => true
         ]);
         return view('dashboard.frontend.index', compact('category','product','orders','totalSales','totalRevenue','todaySales','todayRevenue','users','today_sales_chart','monthly_revenue_chart','monthly_sales_chart'));
     }

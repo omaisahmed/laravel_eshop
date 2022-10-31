@@ -25,7 +25,7 @@
         </ul>
       </nav>
       <div class="copyright float-right">
-        &copy;Copyright
+        &copy;copyright
         <script>
           document.write(new Date().getFullYear())
         </script>, develop by

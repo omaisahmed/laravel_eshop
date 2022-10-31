@@ -204,11 +204,14 @@
               <div id="dailySales" class="chartGraph">
                 {!! $today_sales_chart->container() !!}
               </div>
+              @push('custom-scripts')
+              <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
               <script>
                   var app = new Vue({
                       el: '#dailySales',
                   });
               </script>
+              @endpush     
               {!! $today_sales_chart->script() !!}
             </div>
             <div class="card-body">
@@ -229,11 +232,13 @@
               <div id="monthlyRevenue" class="chartGraph">
                 {!! $monthly_revenue_chart->container() !!}
               </div>
+              @push('custom-scripts')
               <script>
-                  var app = new Vue({
-                      el: '#monthlyRevenue',
-                  });
-              </script>
+                var app = new Vue({
+                    el: '#monthlyRevenue',
+                });
+            </script>
+              @endpush
               {!! $monthly_revenue_chart->script() !!}
             </div>
             <div class="card-body">
@@ -254,11 +259,13 @@
               <div id="monthlySales" class="chartGraph">
                 {!! $monthly_sales_chart->container() !!}
               </div>
+              @push('custom-scripts')
               <script>
-                  var app = new Vue({
-                      el: '#monthlySales',
-                  });
-              </script>
+                var app = new Vue({
+                    el: '#monthlySales',
+                });
+            </script>
+              @endpush        
               {!! $monthly_sales_chart->script() !!}
             </div>
             <div class="card-body">

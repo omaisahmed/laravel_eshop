@@ -43,7 +43,7 @@
 {{-- <script src="{{asset('frontend/assets/demo/demo.js')}}"></script> --}}
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-<script src="https://unpkg.com/vue"></script>
+
 <script>
   $(document).ready(function() {
     $().ready(function() {
