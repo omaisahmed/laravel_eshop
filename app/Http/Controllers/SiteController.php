@@ -10,21 +10,26 @@ use App\Models\Coupons;
 use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use App\Traits\CategoryTrait;
+use App\Traits\ProductsTrait;
 use Illuminate\Support\Facades\View;
 use Cartalyst\Stripe\Exception\CardErrorException;
 
 class SiteController extends Controller
 {
+    use ProductsTrait;
+    use CategoryTrait;
+    
     public function index()
     {
         $products = Products::all()->where('status', '1');
-        $categories = Category::all()->where('status', '1')->take(3);
+        $categories = $this->categoryAll()->take(3);
         return view('website.pages.home', compact('products', 'categories'));
     }
 
     public function products()
     {
-        $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
+        $products = $this->productsAll();
         $pagination = Products::latest()->paginate(5);
         $categories = Category::orderBy('name', 'asc')->where('status', '1')->get();
         return view('website.pages.products', compact('products', 'pagination', 'categories'));
@@ -32,16 +37,16 @@ class SiteController extends Controller
 
     public function categories()
     {
-        $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
+        $products = $this->productsAll();
         $pagination = Products::latest()->paginate(5);
-        $categories = Category::all()->where('status', '1');
+        $categories = $this->categoryAll();
         return view('website.pages.categories', compact('categories', 'products', 'pagination'));
     }
     
     public function categories_show(Request $request)
     {
         $postCategories = Products::where('slug',$request->cat)->get();
-        $categories = Category::all()->where('status', '1');
+        $categories = $this->categoryAll();
         $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
         return view('website.pages.categories-show', compact('categories','products','postCategories'));   
      
@@ -49,8 +54,8 @@ class SiteController extends Controller
 
     public function product_show($slug)
     {
-        $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
-        $categories = Category::all()->where('status', '1');
+        $products = $this->productsAll();
+        $categories = $this->categoryAll();
         $pagination = Products::latest()->paginate(5);
         return view('website.pages.show', compact('products', 'pagination', 'categories', 'slug'));
     }
@@ -58,7 +63,7 @@ class SiteController extends Controller
     public function product_detail($productdetail)
     {
         $products = Products::orderBy('name', 'asc')->where('name', $productdetail)->get();
-        $categories = Category::all()->where('status', '1');
+        $categories = $this->categoryAll();
         $pagination = Products::latest()->paginate(5);
         $productsRelated = Products::where('name', '!=', $productdetail)->inRandomOrder()->take(4)->get();
         // $productsRelated = Products::relatedProducts(4, true)->get();
@@ -276,7 +281,7 @@ class SiteController extends Controller
     }
 
     public function searchFilter(Request $request){
-        $categories = Category::all()->where('status', '1');
+        $categories = $this->categoryAll();
         $products = Products::orderBy('name', 'asc')->where('status', '1')->get();
         $search = Products::query();
         $name = $request->name;
