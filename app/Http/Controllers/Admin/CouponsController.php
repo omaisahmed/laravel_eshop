@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Coupons;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCouponRequest;
 
 class CouponsController extends Controller
 {
@@ -18,13 +19,8 @@ class CouponsController extends Controller
     {
         return view('dashboard.coupons.create');
     }
-    public function create_coupon_submit(Request $request)
+    public function create_coupon_submit(CreateCouponRequest $request)
     {
-        $request->validate([
-            'code' => 'required',
-            'percent' => 'required|numeric|lt:101|min:3',      
-        ]);
-
         $coupon = new Coupons();
         $coupon->code = $request->code;
         $coupon->percent = $request->percent;

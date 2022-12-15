@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\CreateUserRequest;
 
 class UsersController extends Controller
 {
@@ -18,14 +19,7 @@ class UsersController extends Controller
     {
         return view('dashboard.users.create');
     }
-    public function create_user_submit(Request $request){
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'roles' => 'required',       
-        ]);
-
+    public function create_user_submit(CreateUserRequest $request){
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -39,14 +33,7 @@ class UsersController extends Controller
         $user = User::find($id);
         return view('dashboard.users.edit', compact('user'));
     }
-    public function edit_user_submit(Request $request, $id){
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'], 
-            'roles' => 'required',    
-        ]);
-
+    public function edit_user_submit(CreateUserRequest $request, $id){
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;

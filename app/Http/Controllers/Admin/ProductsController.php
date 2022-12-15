@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Products;
 use App\Models\Category;
+use App\Models\Products;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\CreateProductRequest;
 
 class ProductsController extends Controller
 {
@@ -23,22 +24,8 @@ class ProductsController extends Controller
         $categories = Category::all();
         return view('dashboard.products.create',compact('categories'));
     }
-    public function create_product_submit(Request $request){
-        $request->validate([
-            'cat_id' => 'required',
-            'name' => 'required',
-            'slug' => 'required',
-            'small_description' => 'required',
-            'description' => 'required',
-            'original_price' => 'required',
-            'selling_price' => 'required',
-            'image' => 'required',
-            'qty' => 'required',
-            'tax' => 'required',
-            'meta_title' => 'required',
-            'meta_keywords' => 'required',
-            'meta_description' => 'required',
-        ]);
+    public function create_product_submit(CreateProductRequest $request){
+        // $validated = $request->validated(); //with or without it works 
 
         if($request->hasFile('image')){
         $file = $request->file('image');     
@@ -71,22 +58,7 @@ class ProductsController extends Controller
         $product = Products::find($id);
         return view('dashboard.products.edit',compact('product','categories'));
     }
-    public function edit_product_submit(Request $request, $id){
-        $request->validate([
-            'cat_id' => 'required',
-            'name' => 'required',
-            'slug' => 'required',
-            'small_description' => 'required',
-            'description' => 'required',
-            'original_price' => 'required',
-            'selling_price' => 'required',
-            'image' => 'required',
-            'qty' => 'required',
-            'tax' => 'required',
-            'meta_title' => 'required',
-            'meta_keywords' => 'required',
-            'meta_description' => 'required',
-        ]);
+    public function edit_product_submit(CreateProductRequest $request, $id){
 
         if($request->hasFile('image')){
         $file = $request->file('image');     

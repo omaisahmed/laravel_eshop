@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\CreateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -18,16 +19,7 @@ class CategoryController extends Controller
     {
         return view('dashboard.category.create');
     }
-    public function create_category_submit(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'meta_title' => 'required',
-            'meta_description' => 'required',
-            'meta_keywords' => 'required',
-        ]);
+    public function create_category_submit(CreateCategoryRequest $request){
 
         if($request->hasFile('image')){
         $file = $request->file('image');     
@@ -53,16 +45,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('dashboard.category.edit', compact('category'));
     }
-    public function edit_category_submit(Request $request, $id){
-        $request->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'meta_title' => 'required',
-            'meta_description' => 'required',
-            'meta_keywords' => 'required',
-        ]);
+    public function edit_category_submit(CreateCategoryRequest $request, $id){
 
         if($request->hasFile('image')){
         $file = $request->file('image');     
