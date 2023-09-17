@@ -29,7 +29,7 @@
                 <div class="col-md-6 my-3">
                     <div class="form-group bmd-form-group">
                         <label class="bmd-label-floating">Name</label>
-                        <input id="name" type="text" class="form-control" value="{{$user->name}}" name="name" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control" value="{{$user->name}}" name="name" required autocomplete="name" placeholder="Enter Name" autofocus>
                     </div>
                 </div>
                 <div class="col-md-6 my-3">
